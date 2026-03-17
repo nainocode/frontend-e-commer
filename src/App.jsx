@@ -16,14 +16,14 @@ const App = () => {
   return (
     <Routes>
       {/* Authtication Authorization  */}
-      {/* <Route
+      <Route
         path='/signup'
         element={authUser ? <Navigate to="/" /> : <Signup />}
       />
       <Route
         path='/login'
         element={authUser ? <Navigate to="/" /> : <Login />}
-      /> */}
+      />
 
       {/* All  Navbar Pages  */}
       <Route
