@@ -33,7 +33,7 @@ const Login = () => {
         console.log('User Login Successfully', response.data);
         // ----- Correct Data Path -----
         const user = response.data;
-        const token = response.data.data.token;
+        const token = response.data.data?.token;
         // ----- Save to localStorage -----
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('token', token); 
