@@ -10,7 +10,7 @@ const Signup = () => {
     const notify = () => toast('User Signup Successfully');
     const navigate = useNavigate();
 
-    const [authUser, setAuthUser] = useAuth();
+    const {authUser, setAuthUser} = useAuth();
 
     const {
         register,
