@@ -12,7 +12,7 @@ const Login = () => {
 
     const notify = () => toast('User Login Successfully');
     const navigate = useNavigate();
-    const [ authUser , setAuthUser] = useAuth();
+    const { authUser, setAuthUser } = useAuth();
     
     const {
         register,
@@ -30,7 +30,6 @@ const Login = () => {
             'http://localhost:4001/api/auth/login',
             UserInfo
         );
-        console.log('User Login Successfully', response.data);
         // ----- Correct Data Path -----
         const user = response.data;
         const token = response.data.data?.token;

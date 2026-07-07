@@ -5,12 +5,12 @@ import { useAuth } from '../context/AuthProvider';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 
-const Signup = () => {
+const AdminSignup = () => {
 
-    const notify = () => toast('User Signup Successfully');
+    const notify = () => toast('Admin Signup Successfully');
     const navigate = useNavigate();
 
-    const [authUser, setAuthUser] = useAuth();
+    const [adminAuthUser, setAdminAuthUser] = useAuth();
 
     const {
         register,
@@ -21,39 +21,42 @@ const Signup = () => {
         const UserInfo = {
             name: data.name,
             email: data.email,
-            password: data.password
+            password: data.password,
+            adminSecret: data.adminSecret
         };
 
         try {
             const response = await axios.post(
-                'http://localhost:4001/api/auth/register',
+                'http://localhost:4001/api/admin/register',
                 UserInfo
             );
-            console.log('User Signup Successfully', response.data);
             // ----- Correct Data Path -----
-            const user = response.data;
+            const adminUser = response.data;
             const token = response.data.data.token;
 
             // ----- Save to localStorage -----
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('adminUser', JSON.stringify(adminUser));
             localStorage.setItem('token', token);
 
             // ----- Update React Context -----
-            setAuthUser(user);
+            setAdminAuthUser(adminUser);
             // ----- Redirect -----
             navigate('/');
-            toast.success('Successfully Signed Up!');
-``
+            toast.success('Successfully Admin Signed Up!');
+
         } catch (error) {
             alert('Registration failed: ' + error.response.data.error);
-            console.error('Signup error:', error);
+            console.error('Admin Signup error:', error);
         }
     };
     return (
         <>
             <div >
                 <form onSubmit={handleSubmit(onSubmit)} >
+
                     <div className='w-full border border-purple-600 max-w-lg mx-auto  p-6 mt-30 bg-[#37445e] rounded-base shadow-xl '>
+
+
                         <div className="mb-6">
                             <label for="name" className="block mb-2.5 text-sm font-medium text-heading">Name</label>
                             <input
@@ -72,6 +75,12 @@ const Signup = () => {
                                 {...register("password", { required: true })}
                                 type="password" id="password" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="•••••••••" required />
                         </div>
+                        <div className="mb-6">
+                            <label for="adminSecret" className="block mb-2.5 text-sm font-medium text-heading">Admin Secret</label>
+                            <input
+                                {...register("adminSecret", { required: true })}
+                                type="password" id="adminSecret" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="•••••••••" required />
+                        </div>
                         <button onClick={notify} type='submit' className='py-2 px-4 bg-purple-400 rounded-full'>Submit</button>
                         <Toaster />
 
@@ -83,4 +92,4 @@ const Signup = () => {
     )
 }
 
-export default Signup;
+export default AdminSignup
