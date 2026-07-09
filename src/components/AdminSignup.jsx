@@ -10,7 +10,7 @@ const AdminSignup = () => {
     const notify = () => toast('Admin Signup Successfully');
     const navigate = useNavigate();
 
-    const [adminAuthUser, setAdminAuthUser] = useAuth();
+    const {adminAuthUser, setAdminAuthUser} = useAuth();
 
     const {
         register,
