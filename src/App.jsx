@@ -27,7 +27,7 @@ const App = () => {
       />
       <Route
         path='/admin-signup'
-        element={adminAuthUser ? <Navigate to="/" /> : <AdminSignup />}
+        element={adminAuthUser ? <Navigate to="/products" /> : <AdminSignup />}
       />
 
       {/* Home page - agar login nai to signup pe bhejo */}
